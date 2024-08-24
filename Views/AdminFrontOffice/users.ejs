@@ -1,0 +1,129 @@
+<%- include('../partsadminFOFF/top')%>
+  <!-- Sidebar -->
+  <%- include('../partsadminFOFF/sidebar')%>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div style="background-color: #000000; border-color: #000000;" id="content">
+        <!-- TopBar -->
+        <%- include('../partsadminFOFF/navbar')%>
+          <!-- Topbar -->
+
+          <!-- Container Fluid-->
+          <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-100">Tous les utilisateurs</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+                <li class="breadcrumb-item active text-gray-100" aria-current="page">Tous les utilisateurs</li>
+              </ol>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+              <!-- DataTable with Hover -->
+              <div class="col-lg-12">
+                <div class="card mb-4">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Tous les utilisateurs avec survol</h6>
+                  </div>
+                  <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>nom utilisateur</th>
+                          <th>email</th>
+                          <th>role</th>
+                          <th>
+                            <h6 style="transform: translateX(50px);font-weight: bold;">Action</h6>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>nom utilisateur</th>
+                          <th>email</th>
+                          <th>role</th>
+                          <th>
+                            <h6 style="transform: translateX(50px);font-weight: bold;">Action</h6>
+                          </th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <% for (let i=0; i < users.length - 1; i++) { %>
+                          <% const user=users[i]; %>
+                            <tr>
+                              <th>
+                                <%= user.Nom%>
+                              </th>
+                              <th>
+                                <%= user.Email%>
+                              </th>
+                              <th>
+                                <%= user.Role%>
+                              </th>
+                              <th>
+                                <a class="btn btn-danger" style="
+                            font-size: 20px;
+                            width: 110px;
+                            height: 40px;
+                            transform: translateX(-40px);
+                          " href="/deleteUser/<%= user.ID%>">
+                                  supprimer
+                                </a>
+
+                                <div class="dropdown show">
+                                  <a id="modifyButton"
+                                    style="font-size: 20px; width: 120px; height: 40px; transform: translateX(80px) translateY(-40px);"
+                                    class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Modifier
+                                  </a>
+
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToUserHautNiveau/<%= user.ID%>/user_haut_niveau">user haut
+                                      niveau</a>
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToAminBackOffice/<%= user.ID%>/AdminBackOffice">Admin
+                                      Back-office</a>
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToAminFrontOffice/<%= user.ID%>/AdminFrontOffice">Admin
+                                      Front-office</a>
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToUserDepenses/<%= user.ID%>/user_depenses">user dépenses</a>
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToUserFinancement/<%= user.ID%>/UserFinancement">user
+                                      Financement</a>
+                                    <a class="dropdown-item"
+                                      href="/updateRoleToUserRecettes/<%= user.ID%>/UserRecettes">User Recettes</a>
+                                  </div>
+
+                                </div>
+                              </th>
+                            </tr>
+                            <%}%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Row-->
+
+            <!-- Documentation Link -->
+            <div class="row">
+              <div class="col-lg-12">
+              </div>
+            </div>
+
+
+          </div>
+          <%- include('../partsadminFOFF/footer')%>
+            <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+    </div>
+
+    </div>
+
+    <%- include('../partsadminFOFF/bottomReel')%>

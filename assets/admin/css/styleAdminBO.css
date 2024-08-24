@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  #fileContent {
+    margin-top: 20px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table, th, td {
+    border: 1px solid #dcdcdc; /* Blanc foncé */
+    padding: 8px;
+    color: #dcdcdc; /* Blanc foncé */
+  }
+  
+  th {
+    background-color: #000266;
+  }

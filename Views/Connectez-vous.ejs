@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ministére de Finances</title>
+    <!-- Google Fonts Link For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="css/styleLoginPage.css" />
+    <script src="js/scriptLoginPage.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <span class="hamburger-btn material-symbols-rounded">menu</span>
+        <a href="#" class="logo">
+          <img src="images/شعار_وزارة_المالية_الجزائر.svg" alt="logo" style="width: 23%;"/>
+        </a>
+        <ul class="links">
+          <span class="close-btn material-symbols-rounded">close</span>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <button class="login-btn">Connexion</button>
+      </nav>
+    </header>
+
+    <div class="blur-bg-overlay"></div>
+    <div class="form-popup">
+      <span class="close-btn material-symbols-rounded">close</span>
+      <div class="form-box login">
+        <div class="form-details"></div>
+        <div class="form-content">
+          <h2>Connectez-vous</h2>
+          <form action="/login" method="post">
+            <div class="input-field">
+              <input type="text" name="mail" id="username" required />
+              <label>Email</label>
+            </div>
+            <div class="input-field">
+              <input type="password" name="psw" id="password" required />
+              <label>Mot de Passe</label>
+            </div>
+            <a href="#" class="forgot-pass-link">Mot de passe oublié ?</a>
+
+
+            <script>
+              // Vérifier si la variable msj est définie et non vide
+              if ("<%= role %>" === "Mot de passe incorrect") {
+                // Afficher une alerte avec le contenu de la variable msj
+                alert("<%= role %>");
+              }else if ("<%= role %>" === "Compte inexistant") {
+                // Afficher une alerte avec le contenu de la variable msj
+                alert("<%= role %>");
+              }else if ("<%= role %>" === "Role vide") {
+                // Afficher une alerte avec le contenu de la variable msj
+                alert("Le rôle n'est pas encore attribué. Veuillez attendre que l'administrateur front office attribue votre rôle");
+              }
+            </script>
+
+
+            <button type="submit">Connexion</button>
+          </form>
+          <div class="bottom-link">
+            Vous n'avez pas de compte ?
+            <a href="#" id="signup-link">Inscription</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-box signup">
+        <div class="form-details"></div>
+        <div class="form-content">
+          <h2>Inscrivez-vous</h2>
+          <form action="/register" method="post">
+            <div class="input-field">
+              <input type="text" name="name" required />
+              <label>Entrez Votre Nom</label>
+            </div>
+
+            <div class="input-field">
+              <input type="email" name="email" required />
+              <label>Entrez votre adresse e-mail</label>
+            </div>
+            <div class="input-field">
+              <input type="password" name="password" required />
+              <label>Créer un mot de passe</label>
+            </div>
+            <div class="policy-text">
+              <input type="checkbox" id="policy" />
+              <label for="policy">
+                J'accepte les
+                <a href="#" class="option">Conditions Générales</a>
+              </label>
+            </div>
+
+            <script>
+              // Vérifier si la variable msj est définie et non vide
+              if ("<%= msj %>" === "Email existe deja.....") {
+                // Afficher une alerte avec le contenu de la variable msj
+                alert("<%= msj %>");
+              }
+            </script>
+
+            <button type="submit">Inscription</button>
+          </form>
+          <div class="bottom-link">
+            Vous avez déjà un compte ?
+            <a href="#" id="login-link">Connexion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

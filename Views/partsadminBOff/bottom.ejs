@@ -1,0 +1,395 @@
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<script src="admin/vendor/jquery/jquery.min.js"></script>
+<script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="admin/js/ruang-admin.min.js"></script>
+<script src="admin/vendor/chart.js/Chart.min.js"></script>
+<script src="admin/js/demo/chart-area-demo.js"></script>
+<script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="admin/js/index.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/backbone/backbone-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jointjs/dist/joint.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable(); // ID From dataTable 
+    $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+  });
+</script>
+
+<script>
+  function deleteFile() {
+    const fileContentElement = document.getElementById('fileContent');
+
+    // Supprimer le contenu du fichier visualisé
+    fileContentElement.innerHTML = '';
+
+    // Réinitialiser l'input file pour permettre à l'utilisateur de charger un nouveau fichier
+    const fileInput = document.getElementById('fileInput');
+    fileInput.value = ''; // Efface la valeur de l'input file, ce qui réinitialise le champ
+    //cache le button envoyer les données séléctionnées 
+    document.getElementById("sendColumnsButton").style.display = "none";
+    // affiche les boutons Saisie Manuelle
+      const buttonMandat = document.getElementById("ManualInputMandat");
+      const buttonCredit = document.getElementById("ManualInputCredit");
+      const buttonRecette = document.getElementById("ManualInputRecettes");
+      const buttonDettes = document.getElementById("ManualInputDettes");
+
+      if (buttonMandat) {
+          // affiche le bouton Saisie Manuelle Mandat
+          //alert("buttonMandat Trouvé");
+          buttonMandat.style.display = "inline-block";
+      } else if (buttonCredit) {
+          // affiche le bouton Saisie Manuelle Crédit
+          //alert("buttonCredit Trouvé");
+          buttonCredit.style.display = "inline-block";
+      } else if (buttonRecette) {
+          // affiche le bouton Saisie Manuelle Recette
+          //alert("buttonRecette Trouvé");
+          buttonRecette.style.display = "inline-block";
+      } else if (buttonDettes) {
+          // affiche le bouton Saisie Manuelle Dettes
+          //alert("buttonDettes Trouvé");
+          buttonDettes.style.display = "inline-block";
+      }
+  }
+</script>
+
+
+<script>
+  var graph = new joint.dia.Graph();
+
+  var paper = new joint.dia.Paper({
+      el: document.getElementById('myDiagram'),
+      model: graph,
+      width: 1100,
+      height: 1200,
+      gridSize: 1
+  });
+
+  function createClassEntity(x, y, className, attributes, classNamePos) {
+    var elements = [];
+    // Calculate the required height based on the number of attributes
+    var rectHeight = 60 + (attributes.length * 20);
+
+    // Create a basic rectangle for the class
+    var rect = new joint.shapes.standard.Rectangle();
+    rect.position(x, y);
+    rect.resize(250, rectHeight);
+    rect.attr({
+        body: {
+          fill: 'green' // Light green color for the rectangle
+        },
+        label: {
+            text: className,
+            fill: 'white',
+            'font-size': 16,
+            'ref-x': classNamePos.x,
+            'ref-y': classNamePos.y,
+            'text-anchor': 'start'
+        }
+    });
+
+    elements.push(rect);
+
+    // Create text blocks for each attribute
+    attributes.forEach((attribute, index) => {
+        var attributeText = new joint.shapes.standard.TextBlock();
+        attributeText.position(x + 5, y + 45 + (index * 20)); // Adjust positioning for each attribute
+        attributeText.resize(240, 20); // Adjust size as needed
+        
+        // Check if the attribute is a primary key or foreign key or  both
+        var isPrimaryKey = attribute.includes('PK');
+      var isForeignKey = attribute.includes('FK');
+      var isForeignKeyPrimaryKey = isPrimaryKey && isForeignKey;
+
+      var fontStyle = isPrimaryKey ? 'bold' : isForeignKey ? 'italic' : 'normal';
+      var fontWeight = isForeignKeyPrimaryKey ? 'bold' : 'normal';
+
+        attributeText.attr({
+            body: {
+                fill: 'white', // No background
+                stroke: 'white' // No border
+            },
+            label: {
+                text: attribute,
+                fill: 'black', // Changed to black for visibility
+                'font-size': 12,
+                'ref-y': 0,
+                'ref-x': 0,
+                'text-anchor': 'start',
+                'fontWeight': fontWeight,
+                'fontStyle': fontStyle
+            }
+        });
+
+        elements.push(attributeText);
+    });
+
+    // Create a separator line
+    var separatorLine = new joint.shapes.standard.Rectangle();
+    separatorLine.position(x, y + 35); // Adjust positioning
+    separatorLine.resize(250, 2);
+    separatorLine.attr({
+        body: {
+            fill: 'dark',
+            stroke: 'dark',
+            'stroke-width': 2
+        }
+    });
+
+    elements.push(separatorLine);
+
+    // Add elements to the graph
+    graph.addCells(elements);
+
+    // Add event listeners to move all elements together
+    rect.on('change:position', function(rect, newPos) {
+        var dx = newPos.x - x;
+        var dy = newPos.y - y;
+        separatorLine.position(x + dx, y + 35 + dy);
+        attributes.forEach((_, index) => {
+            var attributeElement = elements[index + 1];
+            attributeElement.position(x + 5 + dx, y + 45 + (index * 20) + dy);
+        });
+    });
+
+    return { rect: rect, separatorLine: separatorLine };
+}
+
+
+  // Create and add class entities to the graph
+  var Wilaya = createClassEntity(100, 30, 'Wilaya', ['Code_Wilaya: VARCHAR(255) PK', 'Libelle_wilaya: VARCHAR(255)'], { x: -30, y: -30 });
+var Ordonnateur = createClassEntity(100, 200, 'Ordonnateur', ['CODE_ORD: VARCHAR(255) PK', 'LIBELLE_ORD: VARCHAR(255)','Code_Wilaya: VARCHAR(255) FK'], { x: -40, y: -40 });
+var Recette = createClassEntity(500, 20, 'Recette', ['CODE_CPT: VARCHAR(255) PK', 'MOIS: VARCHAR(255)', 'GESTION: VARCHAR(255)','LIB_CPT_G: VARCHAR(255)','POSTE_C: VARCHAR(255) FK','MT_MOIS: VARCHAR(255)',], { x: -27, y: -70 });
+var Soumissionnaire = createClassEntity(800, 20, 'Soumissionnaire', ['CODE_CPT: VARCHAR(255) PK', 'MOIS: VARCHAR(255)', 'GESTION: VARCHAR(255)','LIB_CPT_G: VARCHAR(255)','POSTE_C: VARCHAR(255) FK','MT_MOIS: VARCHAR(255)'], { x: -55, y: -70 });
+var Dette = createClassEntity(800, 300, 'Dette', ['code_ISIN: VARCHAR(255) PK', 'DATE_DEB: VARCHAR(255)', 'DUREE_bon: VARCHAR(255)','DATE_ECHEANCE: VARCHAR(255)','Code_soum: VARCHAR(255) FK','MONTANT_etat: VARCHAR(255)','Montant_soum: VARCHAR(255) PK', 'Montant_Adjuge: VARCHAR(255)', 'Montant_Coupoun: VARCHAR(255)'], { x: -27, y: -100 });
+var Crédits = createClassEntity(100, 400, 'Crédits', ['GESTION: VARCHAR(255) PK', 'MOIS: VARCHAR(255) PK', 'ORD: VARCHAR(255) PK FK','PORTEF: VARCHAR(255) PK FK','PROG: VARCHAR(255) PK FK','S_PROG: VARCHAR(255) PK FK','ACTION: VARCHAR(255) PK FK', 'S_ACTION: VARCHAR(255) PK FK', 'DISPOS: VARCHAR(255) PK ','TOT_CREDIT: VARCHAR(255) PK', 'TOT_DEB: VARCHAR(255) PK','SOLDE: VARCHAR(255) PK'], { x: -35, y: -130 });
+var AxeProgramatique = createClassEntity(350, 850, 'Axe Programatique', ['CODE_POR:VARCHAR(255) PK', 'LIB_PORTEF: VARCHAR(255)', 'PROG: VARCHAR(255) PK','S_PROG:VARCHAR(255) PK','LIBELLE: VARCHAR(255)'], { x: -60, y: -60});
+var Action = createClassEntity(800, 850, 'Action', ['CODE_POR:VARCHAR(255) PK FK', 'PROG: VARCHAR(255) PK FK','S_PROG:VARCHAR(255) PK FK','ACTION: VARCHAR(255) PK','S_ACTION: VARCHAR(255) PK','LIBELLE_ACTION: VARCHAR(255)'], { x: -30, y: -70});
+var Mandat = createClassEntity(500, 300, 'Mandat', ['CODE_POR:VARCHAR(255) PK FK', 'ORD: VARCHAR(255) PK FK', 'GESTION: VARCHAR(255) PK','CODE_MAND:VARCHAR(255) PK','DT_EMISSION: VARCHAR(255) PK','STATUT: VARCHAR(255) PK','PROG: VARCHAR(255) PK FK', 'S_PROG: VARCHAR(255) PK FK', 'ACTION: VARCHAR(255) PK FK', 'S_ACTION: VARCHAR(255) PK FK', 'AXE_ECO: VARCHAR(255) PK FK', 'DISPOS: VARCHAR(255) PK', 'MONTANT: VARCHAR(255) PK'], { x: -27, y: -140});
+var AxeEconomique = createClassEntity(100, 1050, 'Axe Economique', ['AXE_ECO:VARCHAR(255) PK', 'LIBELLE: VARCHAR(255) PK'], { x: -55, y: -30});
+
+
+  // Create links with arrows between classes
+  var link1 = new joint.shapes.standard.Link();
+  link1.source(Wilaya.rect);
+  link1.target(Ordonnateur.rect);
+  link1.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link1);
+
+  var link2 = new joint.shapes.standard.Link();
+  link2.source(Wilaya.rect);
+  link2.target(Recette.rect);
+  link2.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link2);
+
+
+  var link3 = new joint.shapes.standard.Link();
+  link3.source(Soumissionnaire.rect);
+  link3.target(Dette.rect);
+  link3.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link3);
+
+
+  var link4 = new joint.shapes.standard.Link();
+  link4.source(Ordonnateur.rect);
+  link4.target(Crédits.rect);
+  link4.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link4);
+
+
+  var link5 = new joint.shapes.standard.Link();
+  link5.source(Ordonnateur.rect);
+  link5.target(Mandat.rect);
+  link5.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link5);
+
+
+  var link6 = new joint.shapes.standard.Link();
+  link6.source(AxeProgramatique.rect);
+  link6.target(Crédits.rect);
+  link6.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link6);
+
+
+  var link7 = new joint.shapes.standard.Link();
+  link7.source(Action.rect);
+  link7.target(Crédits.rect);
+  link7.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link7);
+
+
+
+  var link8 = new joint.shapes.standard.Link();
+  link8.source(AxeProgramatique.rect);
+  link8.target(Action.rect);
+  link8.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link8);
+
+
+  var link9 = new joint.shapes.standard.Link();
+  link9.source(Action.rect);
+  link9.target(Mandat.rect);
+  link9.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link9);
+
+
+  var link10 = new joint.shapes.standard.Link();
+  link10.source(AxeEconomique.rect);
+  link10.target(Crédits.rect);
+  link10.attr({
+      line: {
+          stroke: 'black',
+          'stroke-width': 2,
+          sourceMarker: {
+              'type': 'path',
+              'd': 'M 0 0 10 -5 10 5 Z' // Triangle arrow
+          },
+          targetMarker: {
+              'type': 'path',
+              'd': 'M 10 -5 10 0 0 0 10 0 10 5 Z' // Three-line arrow
+          }
+      }
+  });
+  graph.addCell(link10);
+</script>
+
+
+
+
+
+
+  
+
+
+
+</body>
+
+</html>

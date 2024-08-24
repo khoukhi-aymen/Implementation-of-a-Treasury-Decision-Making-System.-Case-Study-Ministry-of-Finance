@@ -1,0 +1,139 @@
+<%- include('../partsadminFOFF/top')%>
+  <!-- Sidebar -->
+  <%- include('../partsadminFOFF/sidebar')%>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div style="background-color: #000000; border-color: #000000;" id="content">
+        <!-- TopBar -->
+        <%- include('../partsadminFOFF/navbar')%>
+          <!-- Topbar -->
+          <!-- Container Fluid -->
+          <div id="charts-container">
+            <% for (let i=0; i < CreditsActuals.length-1; i++) { %>
+              <% const CreditsActual=CreditsActuals[i]; %>
+                <div class="container col-xl-3 col-md-6 mb-4" style="height: 170px;">
+                  <div class="card h-100"
+                    style="background-color: #283036; border-color: #283036; margin-left: -100px; width: 400px;">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-100">Total Credits</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-100">
+                            <%= CreditsActual.TotalCredits %> DA
+                          </div>
+                          <div class="mt-2 mb-0 text-muted text-xs text-gray-100">
+                            <span>
+                              <%= CreditsActual.DATE %>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-fw fa-credit-card fa-2x text-warning"></i> <!-- Icon for credits -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+
+                  <% for (let i=0; i < DepensesActuals.length-1; i++) { %>
+                    <% const DepensesActual=DepensesActuals[i]; %>
+                      <div class="container col-xl-3 col-md-6 mb-4" style="height: 170px;">
+                        <div class="card h-100"
+                          style="background-color: #283036; border-color: #283036; margin-left: -100px; width: 400px;">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-100">Total Depenses
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-100">
+                                  <%= DepensesActual.TotalDepenses %> DA
+                                </div>
+                                <div class="mt-2 mb-0 text-muted text-xs text-gray-100">
+                                  <span>
+                                    <%= DepensesActual.DATE %>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="col-auto">
+                                <i class="fas fa-fw fa-coins fa-2x text-danger"></i> <!-- Icon for depenses -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <% } %>
+          </div>
+
+
+          <div id="charts-container">
+            <% for (let i=0; i < RecettesActuels.length-1; i++) { %>
+              <% const RecettesActuel=RecettesActuels[i]; %>
+                <div class="container col-xl-3 col-md-6 mb-4" style="height: 170px;">
+                  <div class="card h-100"
+                    style="background-color: #283036; border-color: #283036; margin-left: -100px; width: 400px;">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-100">Total Recettes</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-100">
+                            <%= RecettesActuel.TotalRecettes %> DA
+                          </div>
+                          <div class="mt-2 mb-0 text-muted text-xs text-gray-100">
+                            <span>
+                              <%= RecettesActuel.DATE %>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fas fa-fw fa-money-bill-wave fa-2x text-success"></i> <!-- Icon for recettes -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+
+                <% for (let i = 0; i < TresorActuals.length-1; i++) { %>
+                  <% const TresorActual = TresorActuals[i]; %>
+                  <% let blinkClass = ''; %> <!-- Classe par défaut vide -->
+                  <% if (TresorActual.TotalTresor < 0) { blinkClass = 'blinkRed'; } else if (Math.abs(TresorActual.TotalTresor) < 100000) { blinkClass = 'blinkOrange'; } else if (Math.abs(TresorActual.TotalTresor) > 100000) {blinkClass = 'blinkDark';} %> <!-- Rouge si inférieur à 0 avec clignotement, Jaune si proche de 0 -->
+                  
+                  <div class="container col-xl-3 col-md-6 mb-4" style="height: 170px;">
+                    <div class="card h-100 <%= blinkClass %>" style="border-color: #283036; margin-left: -100px; width: 400px;">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1 text-gray-100">Total Trésor</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-100"><%= TresorActual.TotalTresor %> DA</div>
+                            <div class="mt-2 mb-0 text-muted text-xs text-gray-100">
+                              <span><%= TresorActual.DATE %></span>
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <i class="fas fa-university fa-2x" style="color: darkgreen;"></i> <!-- Icône pour le trésor avec couleur vert foncé -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+                
+                
+                
+                
+                
+                
+                  
+          </div>
+          <!-- Container Fluid -->
+
+
+      </div>
+      <!-- Footer -->
+      <%- include('../partsadminFOFF/footer')%>
+        <!-- Footer -->
+    </div>
+    </div>
+
+    <%- include('../partsadminFOFF/bottomReel')%>

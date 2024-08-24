@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="admin/img/logo/tableau_de_bord.jpeg" rel="icon">
+  <title>Tableau de bord user recette</title>
+  <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="admin/css/ruang-admin.min.css" rel="stylesheet">
+  <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  
+
+
+  <style>
+
+    #charts-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 20px; /* Espacement entre les sections */
+    }
+
+    .chart-container {
+        width: 500px; /* Largeur fixe pour les diagrammes */
+        height: 300px; /* Hauteur fixe pour les diagrammes */
+        border: 1px solid #ccc; /* Bordure autour des diagrammes */
+        margin: 0 10px; /* Espacement horizontal entre les diagrammes */
+    }
+
+    .center-block {
+     margin-left: 10%;
+   }
+
+
+   #columnchart_values.large {
+  width: 100%; /* Ajustez la largeur à 100% pour agrandir */
+  height: auto; /* Hauteur automatique pour maintenir les proportions */
+}
+
+
+
+
+
+    @media (max-width: 768px) {
+
+        #charts-container {
+            flex-direction: column; /* Empile les diagrammes en colonne sur les petits écrans */
+        }
+
+        .chart-container {
+            width: 100%; /* Diagrammes à 100% de la largeur sur les petits écrans */
+            margin: 10px 0; /* Espacement vertical entre les diagrammes */
+        }
+    }
+
+    /* Styles pour le mode sombre */
+
+/* Couleurs de base */
+.dark-mode-header-row {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.dark-mode-table-row {
+  background-color: #444444;
+  color: #FFFFFF;
+}
+
+.dark-mode-odd-table-row {
+  background-color: #444444;
+  color: #FFFFFF;
+}
+
+.dark-mode-selected-table-row {
+  background-color: #555555;
+  color: #FFFFFF;
+}
+
+.dark-mode-hover-table-row {
+  background-color: #555555;
+  color: #FFFFFF;
+}
+
+.dark-mode-header-cell {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.dark-mode-table-cell {
+  background-color: #444444;
+  color: #FFFFFF;
+}
+
+.dark-mode-row-number-cell {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+
+
+.dark-mode {
+  background-color: #062a4e !important; /* Couleur de fond sombre */
+  color: #ffffff !important; /* Couleur du texte clair */
+}
+
+.dark-mode .sidebar-brand-text {
+  color: #ffffff !important; /* Couleur du texte clair pour le nom du brand */
+}
+
+.dark-mode .nav-link {
+  color: #ffffff !important; /* Couleur du texte clair pour les liens */
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #343a40 !important; /* Couleur de fond sombre pour le menu déroulant */
+  color: #ffffff !important; /* Couleur du texte clair pour le menu déroulant */
+}
+
+.dark-mode .dropdown-item {
+  color: #ffffff !important; /* Couleur du texte clair pour les items du menu déroulant */
+}
+
+.dark-mode .sidebar-divider {
+  border-color: rgba(255, 255, 255, 0.15) !important; /* Couleur de la ligne de séparation */
+}
+
+
+@keyframes blinkRed {
+  0% { background-color: red; }
+  50% { background-color: transparent; }
+  100% { background-color: red; }
+}
+
+.blinkRed {
+  animation: blinkRed 1s infinite;
+}
+
+@keyframes blinkOrange {
+  0% { background-color: #ffcc00; }
+  50% { background-color: transparent; }
+  100% { background-color: #ffcc00; }
+}
+
+.blinkOrange {
+  animation: blinkOrange 1s infinite;
+}
+
+
+
+
+
+.blinkDark {
+ background-color: #283036;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  
+
+
+</head>
+
+<body id="page-top">
+  <div id="wrapper">

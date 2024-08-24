@@ -1,0 +1,119 @@
+<%- include('../../partsadminFOFF/top')%>
+  <!-- Sidebar -->
+  <%- include('../../partsadminFOFF/sidebar') %>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div style="background-color: #000000; border-color: #000000;" id="content">
+        <!-- TopBar -->
+        <%- include('../../partsadminFOFF/navbar')%>
+          <!-- Topbar -->
+
+          <!-- Container Fluid-->
+          <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-100">Tous les Crédits</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+                <li class="breadcrumb-item active text-gray-100" aria-current="page">Tous les Crédits</li>
+              </ol>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+              <!-- DataTable with Hover -->
+              <div class="col-lg-12">
+                <div class="card mb-4">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Tous les Crédits avec survol</h6>
+                  </div>
+                  <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>code_Ordonnateur</th>
+                          <th>Code_Portefeuille</th>
+                          <th>Programme</th>
+                          <th>SousProgramme</th>
+                          <th>Action</th>
+                          <th>SousAction</th>
+                          <th>AxeEconomique</th>
+                          <th>TotalCredits</th>
+                          <th>TotalCreditDEB</th>
+                          <th>Solde</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>code_Ordonnateur</th>
+                          <th>Code_Portefeuille</th>
+                          <th>Programme</th>
+                          <th>SousProgramme</th>
+                          <th>Action</th>
+                          <th>SousAction</th>
+                          <th>AxeEconomique</th>
+                          <th>TotalCredits</th>
+                          <th>TotalCreditDEB</th>
+                          <th>Solde</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <% for (let i=0; i < Credits.length - 1; i++) { %>
+                          <% const Credit=Credits[i]; %>
+                            <tr>
+                              <th>
+                                <%= Credit.codeOrdonnateur%>
+                              </th>
+                              <th>
+                                <%= Credit.CodePortef%>
+                              </th>
+                              <th>
+                                <%= Credit.Programme%>
+                              </th>
+                              <th>
+                                <%= Credit.SousProgramme%>
+                              </th>
+                              <th>
+                                <%= Credit.Action%>
+                              </th>
+                              <th>
+                                <%= Credit.SousAction%>
+                              </th>
+                              <th>
+                                <%= Credit.AxeEconomique%>
+                              </th>
+                              <th>
+                                <%= Credit.TotalCredits%>
+                              </th>
+                              <th>
+                                <%= Credit.TotalCreditDEB%>
+                              </th>
+                              <th>
+                                <%= Credit.Solde%>
+                              </th>
+                            </tr>
+                            <%}%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Row-->
+
+            <!-- Documentation Link -->
+            <div class="row">
+              <div class="col-lg-12">
+              </div>
+            </div>
+
+
+          </div>
+          <%- include('../../partsadminFOFF/footer')%>
+            <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+    </div>
+
+    </div>
+
+    <%- include('../../partsadminFOFF/bottomReel')%>

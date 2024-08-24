@@ -1,0 +1,30 @@
+<%- include('../partsUserHautNiveau/top')%>
+    <!-- Sidebar -->
+    <%- include('../partsUserHautNiveau/sidebar')%>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div style="background-color: #000000; border-color: #000000;" id="content">
+        <!-- TopBar -->
+        <%- include('../partsUserHautNiveau/navbar')%>
+        <!-- Topbar -->
+
+        <!-- Container Fluid-->
+          <div id="charts-container">
+            <div class="chart-container" id="columnchart_values" data-objects='<%- JSON.stringify(objects) %>'></div>
+            <div class="chart-container" id="chart_histograme" data-objects='<%- JSON.stringify(objects) %>'></div>
+          </div>
+
+          <hr> <!-- Ligne horizontale entre les deux rangées de diagrammes -->
+          <div id="charts-container">
+            <div id="Reel_table_div"  class="chart-container" data-objects='<%- JSON.stringify(objects) %>'></div>
+            <div class="chart-container" id="piechart" data-objects='<%- JSON.stringify(objects) %>'></div>
+          </div>
+        <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+      <%- include('../partsUserHautNiveau/footer')%>
+      <!-- Footer -->
+    </div>
+  </div>
+
+  <%- include('../partsUserHautNiveau/bottomReel')%>

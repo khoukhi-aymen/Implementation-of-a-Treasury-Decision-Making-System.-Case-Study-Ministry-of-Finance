@@ -1,0 +1,99 @@
+<%- include('../../partsadminFOFF/top')%>
+  <!-- Sidebar -->
+  <%- include('../../partsadminFOFF/sidebar') %>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div style="background-color: #000000; border-color: #000000;" id="content">
+        <!-- TopBar -->
+        <%- include('../../partsadminFOFF/navbar')%>
+          <!-- Topbar -->
+
+          <!-- Container Fluid-->
+          <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-100">Tous les Recettes</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+                <li class="breadcrumb-item active text-gray-100" aria-current="page">Tous les Recettes</li>
+              </ol>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+              <!-- DataTable with Hover -->
+              <div class="col-lg-12">
+                <div class="card mb-4">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Tous les Recettes avec survol</h6>
+                  </div>
+                  <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>Gestion</th>
+                          <th>Mois</th>
+                          <th>CodeCompte</th>
+                          <th>LibelleCompte</th>
+                          <th>PosteComptable</th>
+                          <th>Montant</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Gestion</th>
+                          <th>Mois</th>
+                          <th>CodeCompte</th>
+                          <th>LibelleCompte</th>
+                          <th>PosteComptable</th>
+                          <th>Montant</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <% for (let i=0; i < Recettes.length - 1; i++) { %>
+                          <% const Recette=Recettes[i]; %>
+                            <tr>
+                              <th>
+                                <%= Recette.Gestion%>
+                              </th>
+                              <th>
+                                <%= Recette.Mois%>
+                              </th>
+                              <th>
+                                <%= Recette.CodeCompte%>
+                              </th>
+                              <th>
+                                <%= Recette.libelleCompte%>
+                              </th>
+                              <th>
+                                <%= Recette.PosteComptable%>
+                              </th>
+                              <th>
+                                <%= Recette.Montant%>
+                              </th>
+                            </tr>
+                            <%}%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Row-->
+
+            <!-- Documentation Link -->
+            <div class="row">
+              <div class="col-lg-12">
+              </div>
+            </div>
+
+
+          </div>
+          <%- include('../../partsadminFOFF/footer')%>
+            <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+    </div>
+
+    </div>
+
+    <%- include('../../partsadminFOFF/bottomReel')%>

@@ -1,0 +1,3114 @@
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="admin/vendor/jquery/jquery.min.js"></script>
+  <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="admin/js/ruang-admin.min.js"></script>
+  <script src="admin/vendor/chart.js/Chart.min.js"></script>
+  <script src="admin/js/demo/chart-area-demo.js"></script>  
+  <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="admin/js/index.js"></script>
+  
+
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+
+
+  
+
+<script>
+  document.getElementById("modifyButton").addEventListener("click", function() {
+    var dropdownMenu = document.querySelector("#dropdownMenuLink + .dropdown-menu");
+    dropdownMenu.classList.toggle("show");
+  });
+
+
+
+  document.querySelectorAll("#selectOptions option").forEach(option => {
+    option.addEventListener("click", function(event) {
+      event.stopPropagation(); // Empêche la propagation de l'événement au conteneur parent
+    });
+  });
+
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.load('current', {'packages':['table']});
+  google.charts.setOnLoadCallback(drawCharts);
+
+
+  function drawHistogrammeChart() {
+
+    // Récupérer l'élément HTML contenant les données
+    const chartContainer = document.getElementById('chart_histograme');
+    
+
+    // Récupérer les données de l'attribut data-objects
+    const objectsData = chartContainer.getAttribute('data-objects');
+    // Co nvertir les données JSON en objet JavaScript
+    const objects = JSON.parse(objectsData);
+    // Afficher les données dans la console pour vérification
+    console.log(objects);
+
+
+    // Définir une variable pour indiquer si les colonnes sont présentes
+    let colonnePortefeuillePresente = false;
+    let colonneProgrammePresente = false;
+    let colonneSousProgrammePresente = false;
+    let colonneTitrePresente = false;
+    let colonneCategoriePresente = false;
+    let colonnetotalCreditDEBPresente = false;
+    let ColonneTotalMontantDepensepresent = false;
+    let colonneCodeComptePresente = false;
+    let colonneTotalMontantRecettePresente = false;
+    let colonneCodeWilayaPresente = false;
+    let colonneCodeSoumissionairePresente = false;
+    let colonnelibelleSoumissionairePresente = false;
+    let colonnecodeIsinPresente = false;
+    let colonneTotalMontantDettePresente = false;
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Portefeuille"
+      if (objet.hasOwnProperty('Portefeuille')) {
+        // La colonne "Portefeuille" est présente dans au moins un objet
+        colonnePortefeuillePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Programme"
+      if (objet.hasOwnProperty('Programme')) {
+        // La colonne "Programme" est présente dans au moins un objet
+        colonneProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "SousProgramme"
+      if (objet.hasOwnProperty('SousProgramme')) {
+        // La colonne "SousProgramme" est présente dans au moins un objet
+        colonneSousProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Titre"
+      if (objet.hasOwnProperty('Titre')) {
+        // La colonne Titre est présente dans au moins un objet
+        colonneTitrePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Categorie"
+      if (objet.hasOwnProperty('Categorie')) {
+        // La colonne Categorie est présente dans au moins un objet
+        colonneCategoriePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "totalCreditDEB"
+      if (objet.hasOwnProperty('totalCreditDEB')) {
+        // La colonne totalCreditDEB est présente dans au moins un objet
+        colonnetotalCreditDEBPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDepense"
+      if (objet.hasOwnProperty('TotalMontantDepense')) {
+        // La colonne TotalMontantDepense est présente dans au moins un objet
+        ColonneTotalMontantDepensepresent = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeCompte"
+      if (objet.hasOwnProperty('CodeCompte')) {
+        // La colonne "CodeCompte" est présente dans au moins un objet
+        colonneCodeComptePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantRecette"
+      if (objet.hasOwnProperty('TotalMontantRecette')) {
+        // La colonne "TotalMontantRecette" est présente dans au moins un objet
+        colonneTotalMontantRecettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeWilaya"
+      if (objet.hasOwnProperty('CodeWilaya')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneCodeWilayaPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeSoumissionaire"
+      if (objet.hasOwnProperty('CodeSoumissionaire')) {
+        // La colonne "CodeSoumissionaire" est présente dans au moins un objet
+        colonneCodeSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "libelleSoumissionaire"
+      if (objet.hasOwnProperty('libelleSoumissionaire')) {
+        // La colonne "libelleSoumissionaire" est présente dans au moins un objet
+        colonnelibelleSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "codeISIN"
+      if (objet.hasOwnProperty('codeISIN')) {
+        // La colonne "codeISIN" est présente dans au moins un objet
+        colonnecodeIsinPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDette"
+      if (objet.hasOwnProperty('TotalMontantDette')) {
+        // La colonne "TotalMontantDette" est présente dans au moins un objet
+        colonneTotalMontantDettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+
+
+    if (colonnePortefeuillePresente){
+
+      if (colonnetotalCreditDEBPresente) {
+
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Portefeuille, parseFloat(object.totalCreditDEB)]);
+
+        // Trier le tableau 2D par la deuxième colonne (TotalCreditsDEB) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Portefeuille', 'Total Crédits'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Crédits par Portefeuille le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+
+
+
+      } else if (ColonneTotalMontantDepensepresent) {
+        
+
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Portefeuille, parseFloat(object.TotalMontantDepense)]);
+
+        // Trier le tableau 2D par la deuxième colonne (TotalMontantDepense) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Portefeuille', 'Total Montant Dépensé'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Montant Dépensé par Portefeuille le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+
+      }
+
+
+
+
+    } else if (colonneProgrammePresente) {
+
+      if (colonnetotalCreditDEBPresente) {
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Programme, parseFloat(object.totalCreditDEB)]);
+
+        // Trier le tableau 2D par la deuxième colonne (TotalCreditsDEB) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Programme', 'Total Crédits'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Crédits par Programme le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+
+
+      } else if (ColonneTotalMontantDepensepresent) {
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Programme, parseFloat(object.TotalMontantDepense)]);
+
+        // Trier le tableau 2D par la deuxième colonne ( TotalMontantDepense) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Programme', ' Total Montant Dépensé'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Montant Dépensé par Programme le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+      }
+
+
+    } else if (colonneSousProgrammePresente) {
+
+
+      if (colonnetotalCreditDEBPresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.SousProgramme, parseFloat(object.totalCreditDEB)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalCreditsDEB) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['SousProgramme', 'Total Crédits'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Crédits par Sous Programme le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+
+    } else if (ColonneTotalMontantDepensepresent) {
+
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.SousProgramme, parseFloat(object.TotalMontantDepense)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantDepense) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['SousProgramme', 'Total Montant Dépensé'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant Dépensé par Sous Programme le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+      }
+
+
+    } else if (colonneTitrePresente) {
+
+
+      if (colonnetotalCreditDEBPresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.Titre, parseFloat(object.totalCreditDEB)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalCreditsDEB) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Titre', 'Total Crédits'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Crédits par Titre le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+
+    } else if (ColonneTotalMontantDepensepresent) {
+
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Titre, parseFloat(object.TotalMontantDepense)]);
+
+        // Trier le tableau 2D par la deuxième colonne (TotalMontantDepense) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Titre', 'Total Montant Dépensé'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Montant Dépensé par Titre le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+      }
+
+
+    } else if (colonneCategoriePresente) {
+
+      if (colonnetotalCreditDEBPresente) {
+
+        // Convertir les données d'objets en un tableau 2D
+        var dataArray = objects.map(object => [object.Categorie, parseFloat(object.totalCreditDEB)]);
+
+        // Trier le tableau 2D par la deuxième colonne (TotalCreditsDEB) dans l'ordre décroissant
+        dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+        // Créer un tableau de données à partir du tableau 2D trié
+        var data = google.visualization.arrayToDataTable([
+          ['Catégorie', 'Total Crédits'], // Définir les en-têtes des colonnes
+          ...dataArray // Ajouter les données triées du tableau 2D
+        ]);
+
+        // Titre dynamique avec la date
+        var title = "Total Crédits par Catégorie le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+        var chart = new google.visualization.Histogram(
+          document.getElementById("chart_histograme")
+        );
+        chart.draw(data, options);
+      
+
+
+      }else if (ColonneTotalMontantDepensepresent) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.Categorie, parseFloat(object.TotalMontantDepense)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantDepense) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Catégorie', 'Total Montant Dépensé'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant Dépensé par Catégorie le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+        };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+    }
+
+
+   }
+   
+   
+   if (colonneCodeComptePresente && colonneTotalMontantRecettePresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.CodeCompte, parseFloat(object.TotalMontantRecette)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantRecette) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Code Compte', 'Total Montant'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant par Compte le ";
+      if (objects.length > 0 && objects[0].DATE) {
+        title += " " + objects[0].DATE;
+      }
+
+      var options = {
+        title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+      };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+
+    } else if (colonneCodeWilayaPresente && colonneTotalMontantRecettePresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.CodeWilaya, parseFloat(object.TotalMontantRecette)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantRecette) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Poste Comptable', 'Total Montant'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant par Poste Comptable le ";
+      if (objects.length > 0 && objects[0].DATE) {
+        title += " " + objects[0].DATE;
+      }
+
+      var options = {
+        title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+      };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+    }
+
+
+
+
+
+
+    if (colonneCodeSoumissionairePresente  && colonnelibelleSoumissionairePresente && colonneTotalMontantDettePresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.CodeSoumissionaire+" , "+object.libelleSoumissionaire, parseFloat(object.TotalMontantDette)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantDette) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Soumissionaire','Montant Remboursé'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Montant Remboursé par Soumissionaire le";
+      if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+      var options = {
+          title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+      };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+
+    } else if (colonnecodeIsinPresente && colonneTotalMontantDettePresente) {
+
+      // Convertir les données d'objets en un tableau 2D
+      var dataArray = objects.map(object => [object.codeISIN, parseFloat(object.TotalMontantDette)]);
+
+      // Trier le tableau 2D par la deuxième colonne (TotalMontantDette) dans l'ordre décroissant
+      dataArray.sort((a, b) => b[1] - a[1]); // Trie les données par ordre décroissant
+
+      // Créer un tableau de données à partir du tableau 2D trié
+      var data = google.visualization.arrayToDataTable([
+        ['Titre', 'Montant Remboursé'], // Définir les en-têtes des colonnes
+        ...dataArray // Ajouter les données triées du tableau 2D
+      ]);
+
+      // Titre dynamique avec la date
+      var title = "Montant Remboursé par Titre le";
+      if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+      var options = {
+        title: title,
+          legend: { position: "none", textStyle: { color: "#FFFFFF" } },
+          colors: ["#e7711c"],
+          backgroundColor: '#333333',
+          histogram: { lastBucketPercentile: 5 },
+          vAxis: { scaleType: "mirrorLog", textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          hAxis: { textStyle: { color: "#FFFFFF" }, titleTextStyle: { color: "#FFFFFF" } },
+          titleTextStyle: { color: "#FFFFFF" },
+      };
+
+      var chart = new google.visualization.Histogram(
+        document.getElementById("chart_histograme")
+      );
+      chart.draw(data, options);
+
+
+    }
+
+  }
+
+
+
+
+
+
+  function drawPieChart() {
+
+      // Récupérer l'élément HTML contenant les données
+      const chartContainer = document.getElementById('piechart');
+
+      // Récupérer les données de l'attribut data-objects
+      const objectsData = chartContainer.getAttribute('data-objects');
+
+      // Convertir les données JSON en objet JavaScript
+      const objects = JSON.parse(objectsData);
+
+      // Afficher les données dans la console pour vérification
+      console.log(objects);
+
+      // Définir une variable pour indiquer si les colonnes sont présentes
+    let colonnePortefeuillePresente = false;
+    let colonneProgrammePresente = false;
+    let colonneSousProgrammePresente = false;
+    let colonneTitrePresente = false;
+    let colonneCategoriePresente = false;
+    let colonnetotalCreditDEBPresente = false;
+    let ColonneTotalMontantDepensepresent = false;
+    let colonneCodeComptePresente = false;
+    let colonneTotalMontantRecettePresente = false;
+    let colonneCodeWilayaPresente = false;
+    let colonneCodeSoumissionairePresente = false;
+    let colonnelibelleSoumissionairePresente = false;
+    let colonneTotalMontantDettePresente = false;
+    let colonnecodeIsinPresente = false;
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Portefeuille"
+      if (objet.hasOwnProperty('Portefeuille')) {
+        // La colonne "Portefeuille" est présente dans au moins un objet
+        colonnePortefeuillePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Programme"
+      if (objet.hasOwnProperty('Programme')) {
+        // La colonne "Programme" est présente dans au moins un objet
+        colonneProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "SousProgramme"
+      if (objet.hasOwnProperty('SousProgramme')) {
+        // La colonne "SousProgramme" est présente dans au moins un objet
+        colonneSousProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Titre"
+      if (objet.hasOwnProperty('Titre')) {
+        // La colonne Titre est présente dans au moins un objet
+        colonneTitrePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Categorie"
+      if (objet.hasOwnProperty('Categorie')) {
+        // La colonne Categorie est présente dans au moins un objet
+        colonneCategoriePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "totalCreditDEB"
+      if (objet.hasOwnProperty('totalCreditDEB')) {
+        // La colonne totalCreditDEB est présente dans au moins un objet
+        colonnetotalCreditDEBPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDepense"
+      if (objet.hasOwnProperty('TotalMontantDepense')) {
+        // La colonne TotalMontantDepense est présente dans au moins un objet
+        ColonneTotalMontantDepensepresent = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeCompte"
+      if (objet.hasOwnProperty('CodeCompte')) {
+        // La colonne "CodeCompte" est présente dans au moins un objet
+        colonneCodeComptePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantRecette"
+      if (objet.hasOwnProperty('TotalMontantRecette')) {
+        // La colonne "TotalMontantRecette" est présente dans au moins un objet
+        colonneTotalMontantRecettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeWilaya"
+      if (objet.hasOwnProperty('CodeWilaya')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneCodeWilayaPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeSoumissionaire"
+      if (objet.hasOwnProperty('CodeSoumissionaire')) {
+        // La colonne "CodeSoumissionaire" est présente dans au moins un objet
+        colonneCodeSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "libelleSoumissionaire"
+      if (objet.hasOwnProperty('libelleSoumissionaire')) {
+        // La colonne "libelleSoumissionaire" est présente dans au moins un objet
+        colonnelibelleSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "codeISIN"
+      if (objet.hasOwnProperty('codeISIN')) {
+        // La colonne "codeISIN" est présente dans au moins un objet
+        colonnecodeIsinPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDette"
+      if (objet.hasOwnProperty('TotalMontantDette')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneTotalMontantDettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+
+
+      if (colonnePortefeuillePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Portefeuille', 'Total Crédits']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Portefeuille, parseFloat(object.totalCreditDEB)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Portefeuille le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+
+
+        }else  if (ColonneTotalMontantDepensepresent) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Portefeuille', 'Total Montant Dépensé']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Portefeuille, parseFloat(object.TotalMontantDepense)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Portefeuille le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+
+
+        }
+
+
+
+    } else if (colonneProgrammePresente) {
+
+      if (colonnetotalCreditDEBPresente) {
+
+
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Programme', 'Total Crédis']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.Programme, parseFloat(object.totalCreditDEB)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Total Crédits par Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+
+    } else  if (ColonneTotalMontantDepensepresent) {
+
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Programme', 'Total Montant Dépensé']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.Programme, parseFloat(object.TotalMontantDepense)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant Dépensé par Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+    }
+
+
+
+    }  else if (colonneSousProgrammePresente) {
+
+
+      if (colonnetotalCreditDEBPresente) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['SousProgramme', 'Total Crédits']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.SousProgramme, parseFloat(object.totalCreditDEB)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Sous Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['SousProgramme', 'Total Montant dépensé']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.SousProgramme, parseFloat(object.TotalMontantDepense)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant dépensé par Sous Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+        }
+
+
+
+    } else if (colonneTitrePresente) {
+
+      if (colonnetotalCreditDEBPresente) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Titre', 'Total Crédits']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Titre, parseFloat(object.totalCreditDEB)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Titre le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Titre', 'Total Montant Dépensé']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Titre, parseFloat(object.TotalMontantDepense)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Titre le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+        }
+
+
+
+    }  else if (colonneCategoriePresente) {
+
+      if (colonnetotalCreditDEBPresente) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Catégorie', 'Total Crédits']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Categorie, parseFloat(object.totalCreditDEB)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Catégorie le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Catégorie', 'Total Montant Dépensé']
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            chartData.push([object.Categorie, parseFloat(object.TotalMontantDepense)]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Catégorie le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          var options = {
+            title: title,
+            is3D: true,
+            backgroundColor: '#333333',
+            legend: { textStyle: { color: '#FFFFFF' } },
+            titleTextStyle: { color: '#FFFFFF' },
+          };
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+        }
+
+    }
+
+    
+
+
+
+    if (colonneCodeComptePresente && colonneTotalMontantRecettePresente) {
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Code Compte', 'Total Montant']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.CodeCompte, parseFloat(object.TotalMontantRecette)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant par Compte le";
+      if (objects.length > 0 && objects[0].DATE) {
+        title += " " + objects[0].DATE;
+      }
+
+      var options = {
+        title: title,
+        is3D: true,
+        backgroundColor: '#333333',
+        legend: { textStyle: { color: '#FFFFFF' } },
+        titleTextStyle: { color: '#FFFFFF' },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+    }else if(colonneCodeWilayaPresente && colonneTotalMontantRecettePresente){
+
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Poste Comptable', 'Total Montant']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.CodeWilaya, parseFloat(object.TotalMontantRecette)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Total Montant par Poste Comptable le";
+      if (objects.length > 0 && objects[0].DATE) {
+        title += " " + objects[0].DATE;
+      }
+
+      var options = {
+        title: title,
+        is3D: true,
+        backgroundColor: '#333333',
+        legend: { textStyle: { color: '#FFFFFF' } },
+        titleTextStyle: { color: '#FFFFFF' },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+
+    }
+
+
+
+
+    if (colonneCodeSoumissionairePresente  && colonnelibelleSoumissionairePresente && colonneTotalMontantDettePresente) {
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Soumissionaire', 'Montant Remboursé']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.CodeSoumissionaire+" , "+object.libelleSoumissionaire, parseFloat(object.TotalMontantDette)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Montant Remboursé par Soumissionaire le ";
+      if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+      var options = {
+        title: title,
+        is3D: true,
+        backgroundColor: '#333333',
+        legend: { textStyle: { color: '#FFFFFF' } },
+        titleTextStyle: { color: '#FFFFFF' },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+
+    } else if (colonnecodeIsinPresente  && colonneTotalMontantDettePresente) {
+      // Convertir les données d'objets en un tableau exploitable pour Google Charts
+      const chartData = [
+        ['Titre', 'Montant Remboursé']
+      ];
+
+      // Ajouter les données de chaque objet au tableau de données du graphique
+      objects.slice(0, objects.length - 1).forEach(object => {
+        chartData.push([object.codeISIN, parseFloat(object.TotalMontantDette)]);
+      });
+
+      // Créer un tableau de données Google Visualization
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      // Titre dynamique avec la date
+      var title = "Montant Remboursé par Titre le ";
+      if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+      var options = {
+        title: title,
+        is3D: true,
+        backgroundColor: '#333333',
+        legend: { textStyle: { color: '#FFFFFF' } },
+        titleTextStyle: { color: '#FFFFFF' },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+
+
+    }
+
+
+  }
+
+
+
+
+
+
+    function drawTable() {
+      // Récupérer l'élément HTML contenant les données
+      const chartContainer1 = document.getElementById('Reel_table_div');
+
+      // Récupérer les données de l'attribut data-objects
+      const objectsData1 = chartContainer1.getAttribute('data-objects');
+
+      // Convertir les données JSON en objet JavaScript
+      const objects = JSON.parse(objectsData1);
+
+      // Afficher les données dans la console pour vérification
+      console.log(objects);
+
+
+      // Définir une variable pour indiquer si les colonnes  sont présentes
+      let colonnePortefeuillePresente = false;
+      let colonneProgrammePresente = false;
+      let colonneSousProgrammePresente = false;
+      let colonneTitrePresente = false;
+      let colonneCategoriePresente = false;
+      let colonnetotalCreditDEBPresente = false;
+      let ColonneTotalMontantDepensepresent = false;
+      let colonneCodeComptePresente = false;
+      let colonneTotalMontantRecettePresente = false;
+      let colonneCodeWilayaPresente = false;
+      let colonneCodeSoumissionairePresente = false;
+      let colonnelibelleSoumissionairePresente = false;
+      let colonneTotalMontantDettePresente = false;
+      let colonnecodeIsinPresente = false;
+
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "Portefeuille"
+        if (objet.hasOwnProperty('Portefeuille')) {
+          // La colonne "Portefeuille" est présente dans au moins un objet
+          colonnePortefeuillePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "Programme"
+        if (objet.hasOwnProperty('Programme')) {
+          // La colonne "Programme" est présente dans au moins un objet
+          colonneProgrammePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+      // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "SousProgramme"
+      if (objet.hasOwnProperty('SousProgramme')) {
+        // La colonne "SousProgramme" est présente dans au moins un objet
+        colonneSousProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Titre"
+      if (objet.hasOwnProperty('Titre')) {
+        // La colonne Titre est présente dans au moins un objet
+        colonneTitrePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Categorie"
+      if (objet.hasOwnProperty('Categorie')) {
+        // La colonne Categorie est présente dans au moins un objet
+        colonneCategoriePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "totalCreditDEB"
+      if (objet.hasOwnProperty('totalCreditDEB')) {
+        // La colonne totalCreditDEB est présente dans au moins un objet
+        colonnetotalCreditDEBPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDepense"
+      if (objet.hasOwnProperty('TotalMontantDepense')) {
+        // La colonne TotalMontantDepense est présente dans au moins un objet
+        ColonneTotalMontantDepensepresent = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "CodeCompte"
+        if (objet.hasOwnProperty('CodeCompte')) {
+          // La colonne "CodeCompte" est présente dans au moins un objet
+          colonneCodeComptePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "TotalMontantRecette"
+        if (objet.hasOwnProperty('TotalMontantRecette')) {
+          // La colonne "TotalMontantRecette" est présente dans au moins un objet
+          colonneTotalMontantRecettePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+
+      // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeWilaya"
+      if (objet.hasOwnProperty('CodeWilaya')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneCodeWilayaPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeSoumissionaire"
+      if (objet.hasOwnProperty('CodeSoumissionaire')) {
+        // La colonne "CodeSoumissionaire" est présente dans au moins un objet
+        colonneCodeSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "libelleSoumissionaire"
+      if (objet.hasOwnProperty('libelleSoumissionaire')) {
+        // La colonne "libelleSoumissionaire" est présente dans au moins un objet
+        colonnelibelleSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "codeISIN"
+      if (objet.hasOwnProperty('codeISIN')) {
+        // La colonne "codeISIN" est présente dans au moins un objet
+        colonnecodeIsinPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDette"
+      if (objet.hasOwnProperty('TotalMontantDette')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneTotalMontantDettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+
+    
+    
+
+
+
+      if (colonnePortefeuillePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Portefeuille');
+          data.addColumn('string', 'Total Crédits');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Portefeuille, object.totalCreditDEB, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Portefeuille');
+          data.addColumn('string', 'Total Montant Dépensé');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Portefeuille, object.TotalMontantDepense, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+        }
+
+
+      } else if (colonneProgrammePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Programme');
+          data.addColumn('string', 'Total Crédits');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Programme, object.totalCreditDEB, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Programme');
+          data.addColumn('string', 'Total Montant Dépensé');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Programme, object.TotalMontantDepense, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+        }
+
+
+
+      } else if (colonneSousProgrammePresente) {
+
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Sous Programme');
+          data.addColumn('string', 'Total Crédits');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.SousProgramme, object.totalCreditDEB, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+          
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Sous Programme');
+          data.addColumn('string', 'Total Montant Dépensé');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.SousProgramme, object.TotalMontantDepense, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+        }
+
+
+
+      } else if (colonneTitrePresente) {
+
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Titre');
+          data.addColumn('string', 'Total Crédits');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Titre, object.totalCreditDEB, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Titre');
+          data.addColumn('string', 'Total Montant Dépensé');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Titre, object.TotalMontantDepense, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+        }
+
+
+
+      }  else if (colonneCategoriePresente) {
+
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Catégorie');
+          data.addColumn('string', 'Total Crédits');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Categorie, object.totalCreditDEB, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+
+
+          // Créer une nouvelle DataTable
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Catégorie');
+          data.addColumn('string', 'Total Montant Dépensé');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.Categorie, object.TotalMontantDepense, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+        }
+
+      }
+
+
+
+      if (colonneCodeComptePresente && colonneTotalMontantRecettePresente) {
+        // Créer une nouvelle DataTable
+        var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Code Compte');
+          data.addColumn('string', 'Total Montant');
+          data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+          // Ajouter les lignes de données à partir de l'objet 'objects'
+          objects.slice(0, objects.length - 1).forEach(object => {
+            data.addRow([object.CodeCompte, object.TotalMontantRecette, object.DATE]); // Ajout de la date
+          });
+
+          // Définir les options de la table
+          var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+          // Créer la table
+          var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+          // Dessiner la table avec les données et les options
+          table.draw(data, options);
+
+
+      }else if(colonneCodeWilayaPresente && colonneTotalMontantRecettePresente){
+        // Créer une nouvelle DataTable
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'poste Comptable');
+        data.addColumn('string', 'Total Montant');
+        data.addColumn('string', 'Date'); // Ajout de la troisième colonne pour la date
+
+        // Ajouter les lignes de données à partir de l'objet 'objects'
+        objects.slice(0, objects.length - 1).forEach(object => {
+          data.addRow([object.CodeWilaya, object.TotalMontantRecette, object.DATE]); // Ajout de la date
+        });
+
+        // Définir les options de la table
+        var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+        // Créer la table
+        var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+        // Dessiner la table avec les données et les options
+        table.draw(data, options);
+
+
+      }
+
+
+
+      if (colonneCodeSoumissionairePresente  && colonnelibelleSoumissionairePresente && colonneTotalMontantDettePresente) {
+
+        // Créer une nouvelle DataTable
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Soumissionaire');
+        data.addColumn('string', 'Libellé');
+        data.addColumn('string', 'Montant Remboursé');
+        data.addColumn('string', 'Date');
+
+        // Ajouter les lignes de données à partir de l'objet 'objects'
+        objects.slice(0, objects.length - 1).forEach(object => {
+          data.addRow([object.CodeSoumissionaire,object.libelleSoumissionaire, object.TotalMontantDette,object.DATE]); // Ajout de la date
+        });
+
+        // Définir les options de la table
+        var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+        // Créer la table
+        var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+        // Dessiner la table avec les données et les options
+        table.draw(data, options);
+
+
+
+      } else if (colonnecodeIsinPresente && colonneTotalMontantDettePresente) {
+
+        // Créer une nouvelle DataTable
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Titre');
+        data.addColumn('string', 'Montant Remboursé');
+        data.addColumn('string', 'Date');
+
+        // Ajouter les lignes de données à partir de l'objet 'objects'
+        objects.slice(0, objects.length - 1).forEach(object => {
+          data.addRow([object.codeISIN, object.TotalMontantDette,object.DATE]); // Ajout de la date
+        });
+
+        // Définir les options de la table
+        var options = {
+            showRowNumber: true,
+            width: '100%',
+            height: '100%',
+            cssClassNames: {
+              headerRow: 'dark-mode-header-row', // Classe pour la ligne d'en-tête
+              tableRow: 'dark-mode-table-row', // Classe pour les lignes de tableau
+              oddTableRow: 'dark-mode-odd-table-row', // Classe pour les lignes de tableau impaires
+              selectedTableRow: 'dark-mode-selected-table-row', // Classe pour les lignes sélectionnées
+              hoverTableRow: 'dark-mode-hover-table-row', // Classe pour les lignes de survol
+              headerCell: 'dark-mode-header-cell', // Classe pour les cellules d'en-tête
+              tableCell: 'dark-mode-table-cell', // Classe pour les cellules de tableau
+              rowNumberCell: 'dark-mode-row-number-cell' // Classe pour les cellules de numéro de ligne
+            }
+          };
+
+        // Créer la table
+        var table = new google.visualization.Table(document.getElementById('Reel_table_div'));
+
+        // Dessiner la table avec les données et les options
+        table.draw(data, options);
+
+      }
+
+
+    }
+
+
+
+    function drawColumnChart() {
+      // Récupérer l'élément HTML contenant les données
+      const chartContainer = document.getElementById('columnchart_values');
+
+      // Récupérer les données de l'attribut data-objects
+      const objectsData = chartContainer.getAttribute('data-objects');
+
+      // Convertir les données JSON en objet JavaScript
+      const objects = JSON.parse(objectsData);
+
+      // Afficher les données dans la console pour vérification
+      console.log(objects);
+
+
+      // Définir une variable pour indiquer si les colonnes  sont présentes
+      let colonnePortefeuillePresente = false;
+      let colonneProgrammePresente = false;
+      let colonneSousProgrammePresente = false;
+      let colonneTitrePresente = false;
+      let colonneCategoriePresente = false;
+      let colonnetotalCreditDEBPresente = false;
+      let ColonneTotalMontantDepensepresent = false;
+      let colonneCodeComptePresente = false;
+      let colonneTotalMontantRecettePresente = false;
+      let colonneCodeWilayaPresente = false;
+      let colonneCodeSoumissionairePresente = false;
+      let colonnelibelleSoumissionairePresente = false;
+      let colonneTotalMontantDettePresente = false;
+      let colonnecodeIsinPresente = false;
+
+
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "Portefeuille"
+        if (objet.hasOwnProperty('Portefeuille')) {
+          // La colonne "Portefeuille" est présente dans au moins un objet
+          colonnePortefeuillePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "Programme"
+        if (objet.hasOwnProperty('Programme')) {
+          // La colonne "Programme" est présente dans au moins un objet
+          colonneProgrammePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+      // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "SousProgramme"
+      if (objet.hasOwnProperty('SousProgramme')) {
+        // La colonne "SousProgramme" est présente dans au moins un objet
+        colonneSousProgrammePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+     
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Titre"
+      if (objet.hasOwnProperty('Titre')) {
+        // La colonne Titre est présente dans au moins un objet
+        colonneTitrePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "Categorie"
+      if (objet.hasOwnProperty('Categorie')) {
+        // La colonne Categorie est présente dans au moins un objet
+        colonneCategoriePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "totalCreditDEB"
+      if (objet.hasOwnProperty('totalCreditDEB')) {
+        // La colonne totalCreditDEB est présente dans au moins un objet
+        colonnetotalCreditDEBPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDepense"
+      if (objet.hasOwnProperty('TotalMontantDepense')) {
+        // La colonne TotalMontantDepense est présente dans au moins un objet
+        ColonneTotalMontantDepensepresent = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "CodeCompte"
+        if (objet.hasOwnProperty('CodeCompte')) {
+          // La colonne "CodeCompte" est présente dans au moins un objet
+          colonneCodeComptePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+      // Parcourir chaque objet dans le tableau
+      for (const objet of objects) {
+        // Vérifier si l'objet contient la colonne "TotalMontantRecette"
+        if (objet.hasOwnProperty('TotalMontantRecette')) {
+          // La colonne "TotalMontantRecette" est présente dans au moins un objet
+          colonneTotalMontantRecettePresente = true;
+          break; // Sortir de la boucle une fois que la colonne est trouvée
+        }
+      }
+
+
+
+      // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeWilaya"
+      if (objet.hasOwnProperty('CodeWilaya')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneCodeWilayaPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "CodeSoumissionaire"
+      if (objet.hasOwnProperty('CodeSoumissionaire')) {
+        // La colonne "CodeSoumissionaire" est présente dans au moins un objet
+        colonneCodeSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "libelleSoumissionaire"
+      if (objet.hasOwnProperty('libelleSoumissionaire')) {
+        // La colonne "libelleSoumissionaire" est présente dans au moins un objet
+        colonnelibelleSoumissionairePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "codeISIN"
+      if (objet.hasOwnProperty('codeISIN')) {
+        // La colonne "codeISIN" est présente dans au moins un objet
+        colonnecodeIsinPresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+    // Parcourir chaque objet dans le tableau
+    for (const objet of objects) {
+      // Vérifier si l'objet contient la colonne "TotalMontantDette"
+      if (objet.hasOwnProperty('TotalMontantDette')) {
+        // La colonne "CodeWilaya" est présente dans au moins un objet
+        colonneTotalMontantDettePresente = true;
+        break; // Sortir de la boucle une fois que la colonne est trouvée
+      }
+    }
+
+
+      if (colonnePortefeuillePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Portefeuille', 'Total Crédits', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Portefeuille, parseFloat(object.totalCreditDEB), object.Color]); // Ajouter les données au tableau
+
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Portefeuille le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Portefeuille', 'Total Montant Dépensé', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Portefeuille, parseFloat(object.TotalMontantDepense), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Portefeuille le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+        }
+
+
+
+      }else if (colonneProgrammePresente) {
+
+
+        if (colonnetotalCreditDEBPresente) {
+
+
+        // Convertir les données d'objets en un tableau exploitable pour Google Charts
+        const chartData = [
+          ['Programme', 'Total Crédits', { role: "style" }]
+        ];
+
+        // Ajouter les données de chaque objet au tableau de données du graphique
+        objects.slice(0, objects.length - 1).forEach(object => {
+          // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+          chartData.push([object.Programme, parseFloat(object.totalCreditDEB), object.Color]);
+        });
+
+        // Créer un tableau de données Google Visualization
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        // Titre dynamique avec la date
+        var title = "Total Crédits par Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+        // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(data, options);
+
+
+      } else if (ColonneTotalMontantDepensepresent) {
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Programme', 'Total Montant Dépensé', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Programme, parseFloat(object.TotalMontantDepense), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+        }
+
+
+
+      } else if (colonneSousProgrammePresente) {
+
+
+        if (colonnetotalCreditDEBPresente) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['SousProgramme', 'Total Crédits ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.SousProgramme, parseFloat(object.totalCreditDEB), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Sous Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['SousProgramme', 'Total Montant Dépensé ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.SousProgramme, parseFloat(object.TotalMontantDepense), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Sous Programme le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+        }
+
+
+
+      }  else if (colonneTitrePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Titre', 'Total Crédits ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Titre, parseFloat(object.totalCreditDEB), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Titre le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Titre', 'Total Montant Dépensé ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Titre, parseFloat(object.TotalMontantDepense), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Titre le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+        }
+
+
+
+      } else if (colonneCategoriePresente) {
+
+        if (colonnetotalCreditDEBPresente) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Catégorie', 'Total Crédits ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Categorie, parseFloat(object.totalCreditDEB), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Crédits par Catégorie le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+
+        } else if (ColonneTotalMontantDepensepresent) {
+
+          // Convertir les données d'objets en un tableau exploitable pour Google Charts
+          const chartData = [
+            ['Catégorie', 'Total Montant Dépensé ', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.Categorie, parseFloat(object.TotalMontantDepense), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant Dépensé par Catégorie le";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+        }
+
+      }
+
+
+
+      if (colonneCodeComptePresente && colonneTotalMontantRecettePresente) {
+
+        // Convertir les données d'objets en un tableau exploitable pour Google Charts
+        const chartData = [
+            ['Code Compte', 'Total Montant', { role: "style" }]
+          ];
+
+          // Ajouter les données de chaque objet au tableau de données du graphique
+          objects.slice(0, objects.length - 1).forEach(object => {
+            // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+            chartData.push([object.CodeCompte, parseFloat(object.TotalMontantRecette), object.Color]);
+          });
+
+          // Créer un tableau de données Google Visualization
+          var data = google.visualization.arrayToDataTable(chartData);
+
+          // Titre dynamique avec la date
+          var title = "Total Montant par Compte le ";
+          if (objects.length > 0 && objects[0].DATE) {
+            title += " " + objects[0].DATE;
+          }
+
+          // Configurer les options du graphique
+          var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+          // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(data, options);
+
+      }else if(colonneCodeWilayaPresente && colonneTotalMontantRecettePresente){
+        // Convertir les données d'objets en un tableau exploitable pour Google Charts
+        const chartData = [
+          ['Code Wilaya', 'Total Montant ', { role: "style" }]
+        ];
+
+        // Ajouter les données de chaque objet au tableau de données du graphique
+        objects.slice(0, objects.length - 1).forEach(object => {
+          // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+          chartData.push([object.CodeWilaya, parseFloat(object.TotalMontantRecette), object.Color]);
+        });
+
+        // Créer un tableau de données Google Visualization
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        // Titre dynamique avec la date
+        var title = "Total Montant par Poste Comptable le ";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        // Configurer les options du graphique
+        var options = {
+            title: title,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: {
+              scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+              textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+            },
+            hAxis: {
+              textPosition: 'none',
+              textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+            },
+            backgroundColor: '#333333', // Couleur de fond
+            titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+          };
+
+        // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(data, options);
+      }
+
+
+
+      if (colonneCodeSoumissionairePresente && colonnelibelleSoumissionairePresente && colonneTotalMontantDettePresente) {
+
+        // Convertir les données d'objets en un tableau exploitable pour Google Charts
+        const chartData = [
+          ['Soumissionaire', 'Total Montant Remboursé', { role: "style" }]
+        ];
+
+        // Ajouter les données de chaque objet au tableau de données du graphique
+        objects.slice(0, objects.length - 1).forEach(object => {
+          // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+          chartData.push([object.CodeSoumissionaire+" , "+object.libelleSoumissionaire, parseFloat(object.TotalMontantDette), object.Color]);
+        });
+
+        // Créer un tableau de données Google Visualization
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        // Titre dynamique avec la date
+        var title = "Montant Remboursé par Soumissionaire le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        // Configurer les options du graphique
+        var options = {
+          title: title,
+          bar: { groupWidth: "95%" },
+          legend: { position: "none" },
+          vAxis: {
+            scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+            textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+          },
+          hAxis: {
+            textPosition: 'none',
+            textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+          },
+          backgroundColor: '#333333', // Couleur de fond
+          titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+        };
+
+        // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(data, options);
+        
+
+      } else if (colonnecodeIsinPresente && colonneTotalMontantDettePresente) {
+        // Convertir les données d'objets en un tableau exploitable pour Google Charts
+        const chartData = [
+          ['Titre', 'Total Montant Remboursé', { role: "style" }]
+        ];
+
+        // Ajouter les données de chaque objet au tableau de données du graphique
+        objects.slice(0, objects.length - 1).forEach(object => {
+          // Supposons que vous avez une propriété "Color" dans chaque objet pour spécifier la couleur
+          chartData.push([object.codeISIN, parseFloat(object.TotalMontantDette), object.Color]);
+        });
+
+        // Créer un tableau de données Google Visualization
+        var data = google.visualization.arrayToDataTable(chartData);
+
+        // Titre dynamique avec la date
+        var title = "Montant Remboursé par Titre le";
+        if (objects.length > 0 && objects[0].DATE) {
+          title += " " + objects[0].DATE;
+        }
+
+        // Configurer les options du graphique
+        var options = {
+          title: title,
+          bar: { groupWidth: "95%" },
+          legend: { position: "none" },
+          vAxis: {
+            scaleType: 'log', // Utiliser une échelle logarithmique sur l'axe y
+            textStyle: { color: '#FFFFFF' }, // Couleur du texte de l'axe y
+          },
+          hAxis: {
+            textPosition: 'none',
+            textStyle: { color: '#FFFFFF' } // Couleur du texte de l'axe x
+          },
+          backgroundColor: '#333333', // Couleur de fond
+          titleTextStyle: { color: '#FFFFFF' }, // Couleur du titre
+        };
+
+        // Créer une instance de graphique à colonnes et le dessiner dans l'élément HTML spécifié
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(data, options);
+
+      }
+      
+}
+
+
+
+
+
+
+
+
+
+
+  function drawCharts() {
+      drawHistogrammeChart();
+      drawPieChart();
+      drawTable();
+      drawColumnChart();
+  }
+
+</script>
+
+
+</body>
+
+</html>

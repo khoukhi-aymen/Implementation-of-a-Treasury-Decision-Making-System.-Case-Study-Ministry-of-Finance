@@ -1,0 +1,220 @@
+<div style="font-size: 21px">
+  <nav class="navbar navbar-expand navbar-dark topbar mb-4 static-top"  style="background-color: #283036; border-color: #283036;">
+    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
+    <ul class="navbar-nav ml-auto">
+      <% if (test === 'aymen') { %>
+
+        <button
+        id="ManualInputMandat"
+        style="
+          font-size: 20px;
+          width: 200px;
+          height: 40px;
+          transform: translateX(-10px) translateY(15px);
+        "
+        class="btn btn-warning"
+        >
+        <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Saisie Manuelle
+      </button>
+
+      <% } else if (test === 'omar') { %>
+
+        <button
+        id="ManualInputCredit"
+        style="
+          font-size: 20px;
+          width: 200px;
+          height: 40px;
+          transform: translateX(-10px) translateY(15px);
+        "
+        class="btn btn-warning"
+        >
+        <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Saisie Manuelle
+      </button>
+
+      <% } else if (test === 'alaa') { %>
+
+        <button
+        id="ManualInputRecettes"
+        style="
+          font-size: 20px;
+          width: 200px;
+          height: 40px;
+          transform: translateX(-10px) translateY(15px);
+        "
+        class="btn btn-warning"
+        >
+        <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Saisie Manuelle
+      </button>
+
+      <% } else if (test === 'imad') { %>
+        <button
+        id="ManualInputDettes"
+        style="
+          font-size: 20px;
+          width: 200px;
+          height: 40px;
+          transform: translateX(-10px) translateY(15px);
+        "
+        class="btn btn-warning"
+        >
+        <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Saisie Manuelle
+      </button>
+
+      <% } %>
+
+
+
+
+      <% if (test !== "") { %>
+      <button
+        id="downloadButton"
+        for="fileInput"
+        style="
+          font-size: 20px;
+          width: 180px;
+          height: 40px;
+          transform: translateY(15px);
+        "
+        class="btn btn-success"
+        onclick="document.getElementById('fileInput').click();">
+        <i class="fas fa-upload" style="margin-right: 5px"></i>Télécharger
+      </button>
+      <input
+        type="file"
+        id="fileInput"
+        accept=".txt"
+        style="display: none"
+        onchange="handleFile(this.files)" />
+
+        <% } %>
+
+
+
+
+
+        <% if (test === 'aymen') { %>
+      <button
+        id="sendColumnsButton"
+        class="btn btn-info"
+        style="
+          font-size: 20px;
+          height: 40px;
+          transform: translateX(5px) translateY(15px);
+          display: none;
+          background-color: #17a2b8;
+        "
+        onclick="sendSelectedColumnsDepenses()">
+        <i class="fas fa-paper-plane" style="margin-right: 5px"></i> Envoyer les
+        colonnes sélectionnées
+      </button>
+      
+
+      <% } else if (test === 'omar') { %>
+
+        <button
+        id="sendColumnsButton"
+        class="btn btn-info"
+        style="
+          font-size: 20px;
+          height: 40px;
+          transform: translateX(5px) translateY(15px);
+          display: none;
+          background-color: #17a2b8;
+        "
+        onclick="sendSelectedColumnsCredit()">
+        <i class="fas fa-paper-plane" style="margin-right: 5px"></i> Envoyer les
+        colonnes sélectionnées
+      </button>
+
+      <% } else if (test === 'alaa') { %>
+        <button
+        id="sendColumnsButton"
+        class="btn btn-info"
+        style="
+          font-size: 20px;
+          height: 40px;
+          transform: translateX(5px) translateY(15px);
+          display: none;
+          background-color: #17a2b8;
+        "
+        onclick="sendSelectedColumnsRecettes()">
+        <i class="fas fa-paper-plane" style="margin-right: 5px"></i> Envoyer les
+        colonnes sélectionnées
+      </button>
+
+      <% } else if (test === 'imad') { %>
+
+        <button
+        id="sendColumnsButton"
+        class="btn btn-info"
+        style="
+          font-size: 20px;
+          height: 40px;
+          transform: translateX(5px) translateY(15px);
+          display: none;
+          background-color: #17a2b8;
+        "
+        onclick="sendSelectedColumnsDettes()">
+        <i class="fas fa-paper-plane" style="margin-right: 5px"></i> Envoyer les
+        colonnes sélectionnées
+      </button>
+
+      <% } %>
+
+
+      <% if (test !== "") { %>
+      <button
+        id="deleteButton"
+        onclick="deleteFile()"
+        style="
+          font-size: 20px;
+          width: 170px;
+          height: 40px;
+          transform: translateX(10px) translateY(15px);
+          display: none;
+        "
+        class="btn btn-danger">
+        <i class="fas fa-trash-alt" style="margin-right: 5px"></i>supprimer
+      </button>
+
+      <button
+        id="connexionButton"
+        onclick="connectToDatabase()"
+        style="
+          font-size: 20px;
+          width: 180px;
+          height: 40px;
+          transform: translateX(8px) translateY(15px);
+          background-color: #17a2b8;
+        "
+        class="btn btn-info">
+        <i class="fas fa-database" style="margin-right: 5px"></i>Connexion BD
+      </button>
+
+
+      <% } %>
+
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <li class="nav-item dropdown no-arrow">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="userDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+          <form method="POST" action="/logout" style="display: inline;">
+            <button class="btn btn-danger" type="submit" style="font-size: 20px;width: 180px; height: 40px;">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-100"></i>
+              Déconnexion
+            </button>
+          </form>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

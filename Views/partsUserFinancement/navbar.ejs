@@ -1,0 +1,426 @@
+<div style="font-size: 21px">
+  <nav class="navbar navbar-expand navbar-dark topbar mb-4 static-top"  style="background-color: #283036; border-color: #283036;">
+    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <ul class="navbar-nav ml-auto">
+      
+     
+
+
+
+
+      <% if (test === 'said') { %>
+      
+        <form method="POST" action="/DettesReelUF" class="row row-cols-lg-auto g-3 align-items-center"
+          style="transform: translateX(-20px); border: 1px solid white; border-radius: 20px; margin-top: 10px;width: 713px;height: 57px;margin-left: 10px;">
+        
+        
+        
+        
+          <li class="nav-item dropdown no-arrow"
+            style="font-size: 20px; width: 160px; height: 40px; transform: translateX(-1px) translateY(-7px);">
+            <div class="dropdown">
+              <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                style="font-size: 18px; width: 150px; height: 40px; transform: translateX(10px) translateY(1px);"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </a>
+              <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                style="transform: translateX(-17px) translateY(0px);width:200px;background-color: #ff9900; border-color: #ff9900;">
+                <select id="selectOptions" name="selectedOptions" class="form-select mb-2" size="7" style="width: 100%;"
+                  multiple aria-label="Default select example">
+                  <option style="font-size:medium;" value="Total_M_R" name="Total_M_R">Total M.Rembourcé</option>
+                  <option style="font-size:medium;" value="Total_M_Adj" name="Total_M_Adj">Total M.Adjugé</option>
+                  <option style="font-size:medium;" value="Total_M_Coupoun" name="Total_M_Coupoun">Total M.Coupoun</option>
+                  <option style="font-size:medium;" value="Tri_Asc_M_R" name="Tri_Asc_M_R">Tri Asc M.Rembourcé</option>
+                  <option style="font-size:medium;" value="Tri_Desc_M_R" name="Tri_Desc_M_R">Tri Desc M.Rembourcé</option>
+                  <option style="font-size:medium;" value="Ratio_M_R" name="Ratio_M_R">Ratio M.Rembourcé</option>
+                </select>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </li>
+        
+        
+        
+        
+        
+          <li class="nav-item dropdown no-arrow"
+            style="font-size: 20px; width: 160px; height: 40px; transform: translateX(3px) translateY(-7px);">
+            <div class="dropdown">
+              <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                style="font-size: 18px; width: 160px; height: 40px; transform: translateX(5px) translateY(1px);"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dimensions
+              </a>
+              <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                style="width:190px;transform: translateX(-12px) translateY(1px);background-color: #ff9900; border-color: #ff9900;">
+                <select id="selectOptions" name="selectedDimensions" class="form-select mb-2" size="3" style="width: 100%;"
+                  multiple aria-label="Default select example">
+                  <option style="font-size: medium;" value="Titre" name="Titre">Titre</option>
+                  <option style="font-size: medium;" value="Soumissionaire" name="Soumissionaire">Soumissionaire</option>
+                  </optgroup>
+                </select>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </li>
+        
+        
+        
+        
+        
+          <li class="nav-item dropdown no-arrow"
+            style="font-size: 20px; width: 160px; height: 40px; transform: translateX(15px) translateY(-7px);">
+            <div class="dropdown">
+              <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                style="font-size: 18px; width: 160px; height: 40px; transform: translateX(0px) translateY(1px);"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mesures
+              </a>
+        
+        
+              <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                style="transform: translateX(-5px) translateY(1px);width:172px;background-color: #ff9900; border-color: #ff9900;">
+                <select id="selectOptions" name="selectedMesures" class="form-select mb-2" size="1" style="width: 100%;"
+                  multiple aria-label="Default select example">
+                  <option style="font-size: medium;" value="Montant_p.p_etat" name="Montant_p.p_etat">Montant p.p état</option>
+                  <option style="font-size: medium;" value="Montant_p.p_soum" name="Montant_p.p_etat">Montant p.p soum</option>
+                  <option style="font-size: medium;" value="Montant_Adj" name="Montant_p.p_etat">Montant Adjugé</option>
+                  <option style="font-size: medium;" value="Montant_Coupoun" name="Montant_p.p_etat">Montant Coupoun</option>
+                </select>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </li>
+        
+        
+        
+        
+          <li class="nav-item dropdown no-arrow"
+            style="font-size: 20px; width: 160px; height: 40px; transform: translateX(-1px) translateY(-7px);">
+            <div class="dropdown">
+              <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                style="font-size: 18px; width: 160px; height: 40px; transform: translateX(22px) translateY(1px);"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Date
+              </a>
+              <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                style="transform: translateX(20px) translateY(1px);width:160px;background-color: #ff9900; border-color: #ff9900;">
+                <select id="selectDates" name="selectedDates" class="form-select mb-2" size="6" style="width: 100%;">
+                  <option style="font-size: medium;" value="2019" name="2019">2019</option>
+                  <option style="font-size: medium;" value="2020" name="2020">2020</option>
+                  <option style="font-size: medium;" value="2021" name="2021">2021</option>
+                  <option style="font-size: medium;" value="2022" name="2022">2022</option>
+                  <option style="font-size: medium;" value="2023" name="2023">2023</option>
+                  <option style="font-size: medium;" value="2024" name="2024">2024</option>
+                  <option style="font-size: medium;" value="2025" name="2025">2025</option>
+                  <option style="font-size: medium;" value="2026" name="2026">2026</option>
+                  <option style="font-size: medium;" value="2027" name="2027">2027</option>
+                  <option style="font-size: medium;" value="2028" name="2028">2028</option>
+                  <option style="font-size: medium;" value="2029" name="2029">2029</option>
+                  <option style="font-size: medium;" value="2030" name="2030">2030</option>
+                  <option style="font-size: medium;" value="2031" name="2031">2031</option>
+                </select>
+                <div class="dropdown-divider"></div>
+                <input type="date" id="custom-date" name="birthday" class="form-control">
+              </div>
+            </div>
+          </li>
+        
+        
+        
+        
+        
+          <button
+            style="transform: translateX(26px) translateY(-7px); border-top-right-radius: 20px;border-bottom-right-radius: 20px;height: 58px;margin-top:5px; margin-bottom:1px;"
+            type="submit" class="btn btn-info"><i class="fas fa-search fa-fw"></i></button>
+        
+        </form>
+        
+        
+        
+        
+        <% } else if (test==='ahmed' ) { %>
+        
+          <form method="POST" action="/DettesPrevuUF" class="row row-cols-lg-auto g-3 align-items-center"
+            style="transform: translateX(-20px); border: 1px solid white; border-radius: 20px; margin-top: 10px;width: 713px;height: 57px;margin-left: 10px;">
+        
+        
+        
+        
+            <li class="nav-item dropdown no-arrow"
+              style="font-size: 20px; width: 160px; height: 40px; transform: translateX(-1px) translateY(-7px);">
+              <div class="dropdown">
+                <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                  style="font-size: 18px; width: 150px; height: 40px; transform: translateX(10px) translateY(1px);"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actions
+                </a>
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                  style="transform: translateX(-17px) translateY(0px);width:200px;background-color: #ff9900; border-color: #ff9900;">
+                  <select id="selectOptions" name="selectedOptions" class="form-select mb-2" size="7" style="width: 100%;"
+                    multiple aria-label="Default select example">
+                    <option style="font-size:medium;" value="Total_M_R" name="Total_M_R">Total M.Rembourcé</option>
+                    <option style="font-size:medium;" value="Total_M_Adj" name="Total_M_Adj">Total M.Adjugé</option>
+                    <option style="font-size:medium;" value="Total_M_Coupoun" name="Total_M_Coupoun">Total M.Coupoun</option>
+                    <option style="font-size:medium;" value="Tri_Asc_M_R" name="Tri_Asc_M_R">Tri Asc M.Rembourcé</option>
+                    <option style="font-size:medium;" value="Tri_Desc_M_R" name="Tri_Desc_M_R">Tri Desc M.Rembourcé</option>
+                    <option style="font-size:medium;" value="Ratio_M_R" name="Ratio_M_R">Ratio M.Rembourcé</option>
+                    <option style="font-size:medium;" value="Prevision_annuelle">Prévision annuelle</option>
+                    <option style="font-size:medium;" value="Prevision_mensuelle">Prévision mensuelle</option>
+                    <option style="font-size:medium;" value="Prevision_6_mois">Prévision 6 mois</option>
+                  </select>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+        
+        
+        
+        
+        
+            <li class="nav-item dropdown no-arrow"
+              style="font-size: 20px; width: 160px; height: 40px; transform: translateX(3px) translateY(-7px);">
+              <div class="dropdown">
+                <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                  style="font-size: 18px; width: 160px; height: 40px; transform: translateX(5px) translateY(1px);"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dimensions
+                </a>
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                  style="width:190px;transform: translateX(-12px) translateY(1px);background-color: #ff9900; border-color: #ff9900;">
+                  <select id="selectOptions" name="selectedDimensions" class="form-select mb-2" size="3" style="width: 100%;"
+                    multiple aria-label="Default select example">
+                    <option style="font-size: medium;" value="Titre" name="Titre">Titre</option>
+                    <option style="font-size: medium;" value="Soumissionaire" name="Soumissionaire">Soumissionaire</option>
+                    </optgroup>
+                  </select>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+        
+        
+        
+        
+        
+            <li class="nav-item dropdown no-arrow"
+              style="font-size: 20px; width: 160px; height: 40px; transform: translateX(15px) translateY(-7px);">
+              <div class="dropdown">
+                <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                  style="font-size: 18px; width: 160px; height: 40px; transform: translateX(0px) translateY(1px);"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mesures
+                </a>
+        
+        
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                  style="transform: translateX(-5px) translateY(1px);width:172px;background-color: #ff9900; border-color: #ff9900;">
+                  <select id="selectOptions" name="selectedMesures" class="form-select mb-2" size="1" style="width: 100%;"
+                    multiple aria-label="Default select example">
+                    <option style="font-size: medium;" value="Montant_p.p_etat" name="Montant_p.p_etat">Montant p.p état
+                    </option>
+                    <option style="font-size: medium;" value="Montant_p.p_soum" name="Montant_p.p_etat">Montant p.p soum
+                    </option>
+                    <option style="font-size: medium;" value="Montant_Adj" name="Montant_p.p_etat">Montant Adjugé</option>
+                    <option style="font-size: medium;" value="Montant_Coupoun" name="Montant_p.p_etat">Montant Coupoun</option>
+                  </select>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+        
+        
+        
+        
+            <li class="nav-item dropdown no-arrow"
+              style="font-size: 20px; width: 160px; height: 40px; transform: translateX(-1px) translateY(-7px);">
+              <div class="dropdown">
+                <a id="dropdownMenuLinkDate" class="btn btn-warning dropdown-toggle" href="#" role="button"
+                  style="font-size: 18px; width: 160px; height: 40px; transform: translateX(22px) translateY(1px);"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Date
+                </a>
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuLinkDate"
+                  style="transform: translateX(20px) translateY(1px);width:160px;background-color: #ff9900; border-color: #ff9900;">
+                  <select id="selectDates" name="selectedDates" class="form-select mb-2" size="6" style="width: 100%;">
+                    <option style="font-size: medium;" value="2019" name="2019">2019</option>
+                    <option style="font-size: medium;" value="2020" name="2020">2020</option>
+                    <option style="font-size: medium;" value="2021" name="2021">2021</option>
+                    <option style="font-size: medium;" value="2022" name="2022">2022</option>
+                    <option style="font-size: medium;" value="2023" name="2023">2023</option>
+                    <option style="font-size: medium;" value="2024" name="2024">2024</option>
+                    <option style="font-size: medium;" value="2025" name="2025">2025</option>
+                    <option style="font-size: medium;" value="2026" name="2026">2026</option>
+                    <option style="font-size: medium;" value="2027" name="2027">2027</option>
+                    <option style="font-size: medium;" value="2028" name="2028">2028</option>
+                    <option style="font-size: medium;" value="2029" name="2029">2029</option>
+                    <option style="font-size: medium;" value="2030" name="2030">2030</option>
+                    <option style="font-size: medium;" value="2031" name="2031">2031</option>
+                  </select>
+                  <div class="dropdown-divider"></div>
+                  <input type="date" id="custom-date" name="birthday" class="form-control">
+                </div>
+              </div>
+            </li>
+        
+        
+        
+        
+        
+            <button
+              style="transform: translateX(26px) translateY(-7px); border-top-right-radius: 20px;border-bottom-right-radius: 20px;height: 58px;margin-top:5px; margin-bottom:1px;"
+              type="submit" class="btn btn-info"><i class="fas fa-search fa-fw"></i></button>
+        
+          </form>
+
+
+
+
+      <% } %>
+
+
+
+
+
+
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="alertsDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fas fa-bell fa-fw text-gray-100"></i>
+          <span class="badge badge-danger badge-counter">3+</span>
+        </a>
+        <div
+          class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+          aria-labelledby="alertsDropdown">
+          <h6 class="dropdown-header">Alerts Center</h6>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="mr-3">
+              <div class="icon-circle bg-primary">
+                <i class="fas fa-file-alt text-white"></i>
+              </div>
+            </div>
+            <div>
+              <div class="small text-gray-500">December 12, 2019</div>
+              <span class="font-weight-bold"
+                >A new monthly report is ready to download!</span
+              >
+            </div>
+          </a>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="mr-3">
+              <div class="icon-circle bg-success">
+                <i class="fas fa-donate text-white"></i>
+              </div>
+            </div>
+            <div>
+              <div class="small text-gray-500">December 7, 2019</div>
+              $290.29 has been deposited into your account!
+            </div>
+          </a>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="mr-3">
+              <div class="icon-circle bg-warning">
+                <i class="fas fa-exclamation-triangle text-white"></i>
+              </div>
+            </div>
+            <div>
+              <div class="small text-gray-500">December 2, 2019</div>
+              Spending Alert: We've noticed unusually high spending for your
+              account.
+            </div>
+          </a>
+          <a class="dropdown-item text-center small text-gray-500" href="#"
+            >Show All Alerts</a
+          >
+        </div>
+      </li>
+      <li class="nav-item dropdown no-arrow mx-1">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="messagesDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fas fa-envelope fa-fw text-gray-100"></i>
+          <span class="badge badge-warning badge-counter">2</span>
+        </a>
+        <div
+          class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+          aria-labelledby="messagesDropdown">
+          <h6 class="dropdown-header">Message Center</h6>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="dropdown-list-image mr-3">
+              <img
+                class="rounded-circle"
+                src="/admin/img/man.png"
+                style="max-width: 60px"
+                alt="" />
+              <div class="status-indicator bg-success"></div>
+            </div>
+            <div class="font-weight-bold">
+              <div class="text-truncate">
+                Hi there! I am wondering if you can help me with a problem I've
+                been having.
+              </div>
+              <div class="small text-gray-500">Udin Cilok · 58m</div>
+            </div>
+          </a>
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="dropdown-list-image mr-3">
+              <img
+                class="rounded-circle"
+                src="/admin/img/girl.png"
+                style="max-width: 60px"
+                alt="" />
+              <div class="status-indicator bg-default"></div>
+            </div>
+            <div>
+              <div class="text-truncate">
+                Am I a good boy? The reason I ask is because someone told me
+                that people say this to all dogs, even if they aren't good...
+              </div>
+              <div class="small text-gray-500">Jaenab · 2w</div>
+            </div>
+          </a>
+          <a class="dropdown-item text-center small text-gray-500" href="#"
+            >Read More Messages</a
+          >
+        </div>
+      </li>
+
+
+
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <li class="nav-item dropdown no-arrow">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="userDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+          <form method="POST" action="/logout" style="display: inline;">
+            <button class="btn btn-danger" type="submit" style="font-size: 20px;width: 180px; height: 40px;transform: translateX(-10px) translateY(0px);">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-100"></i>
+
+              Déconnexion
+            </button>
+          </form>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
